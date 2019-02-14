@@ -1,0 +1,694 @@
+@import url('https://fonts.googleapis.com/css?family=Mukta:700');
+
+$bg: black;
+$white: black;
+$black: #fff;
+
+@mixin transition($property: all, $duration: 0.45s, $ease: cubic-bezier(0.65,0,.076,1)) {
+  transition: $property $duration $ease;
+}
+
+* {
+  box-sizing: border-box;
+  &::before, &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: 'Mukta', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  background: $bg;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  &.learn-more {
+    width: 12rem;
+    height: auto;
+    .circle {
+      @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+      position: relative;
+      margin: 0;
+      width: 3rem;
+      height: 3rem;
+      background: $black;
+      border-radius: 1.625rem;
+      .icon {
+        @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: $black;
+        &.arrow {
+          @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+          left: 0.625rem;
+          width: 1.125rem;
+          height: 0.125rem;
+          background: none;
+          &::before {
+            position: absolute;
+            content: '';
+            top: -0.25rem;
+            right: 0.0625rem;
+            width: 0.625rem;
+            height: 0.625rem;
+            border-top: 0.125rem solid #fff;
+            border-right: 0.125rem solid #fff;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+    .button-text {
+      @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.75rem 0;
+      margin: 0 0 0 1.85rem;
+      color: $black;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+  &:hover {
+    .circle {
+      width: 100%;
+      .icon {
+        &.arrow {
+        background: $white;
+        transform: translate(1rem, 0);
+        }
+      }
+    }
+    .button-text {
+      color: black;
+    }
+  }
+}
+
+@supports (display: grid) {
+  body {
+    display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.625rem;
+  grid-template-areas: ". main main ." ". main main .";
+  }
+  
+  #container {
+    grid-area: main;
+    align-self: center;
+    justify-self: center;
+  }
+}
+html, body {
+  margin: 0px;
+  padding: 0px;
+  background: url("http://digital.bnint.com/filelib/s9/photos/white_wood_4500x3000_lo_res.jpg");
+}
+
+.carousel {
+  position: relative;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+  margin-top: 26px;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-open:checked + .carousel-item {
+  position: static;
+  opacity: 100;
+}
+
+.carousel-item {
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+
+.carousel-item img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.carousel-control {
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  font-size: 40px;
+  height: 40px;
+  line-height: 35px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  cursor: pointer;
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  text-align: center;
+  width: 40px;
+  z-index: 10;
+}
+
+.carousel-control.prev {
+  left: 2%;
+}
+
+.carousel-control.next {
+  right: 2%;
+}
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #aaaaaa;
+}
+
+#carousel-1:checked ~ .control-1,
+#carousel-2:checked ~ .control-2,
+#carousel-3:checked ~ .control-3 {
+  display: block;
+}
+
+.carousel-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+
+.carousel-indicators li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.carousel-bullet {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 35px;
+}
+
+.carousel-bullet:hover {
+  color: #aaaaaa;
+}
+
+#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+  color: #428bca;
+}
+button {
+  bottom:0;
+}
+#title {
+  width: 100%;
+  position: absolute;
+  padding: 0px;
+  margin: 0px auto;
+  text-align: center;
+  font-size: 27px;
+  color: rgba(255, 255, 255, 1);
+  font-family: 'Open Sans', sans-serif;
+  z-index: 9999;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), -1px 0px 2px rgba(255, 255, 255, 0);
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background: #1f1f1f;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  }
+  
+  $vertPad: 80px;
+  $sidePad: 70px;
+  
+  $numOfEls: 5;
+  $elMrg: 1%;
+  
+  $initAT: 1s;
+  $initDelayStep: 0.1s;
+  $fullInitAT: $initAT + $initDelayStep * ($numOfEls - 1);
+  $moveAT: 0.6s;
+  $expandAT: 0.7s;
+  $expandDelay: 0.1s;
+  $bgScaleAT: 0.8s;
+  $fadeoutAT: $moveAT + $expandAT/2;
+  $indexHoverAT: 0.5s;
+  $closeBtnAT: 0.3s;
+  $closeBtnLineDelay: 0.15s;
+  $fullExpandAT: $moveAT + $expandDelay + $expandAT;
+  $contentFadeinAT: 0.5s;
+  
+  @mixin elHover {
+    .el:hover & {
+      @content;
+    }
+  }
+  
+  @mixin elActive {
+    .el.s--active & {
+      @content;
+    }
+  }
+  
+  @mixin contInactive {
+    .cont.s--inactive & {
+      @content;
+    }
+  }
+  
+  @mixin contElActive {
+    .cont.s--el-active & {
+      @content;
+    }
+  }
+  
+  .cont {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    padding: $vertPad $sidePad;
+  
+    &__inner {
+      position: relative;
+      height: 100%;
+      
+      &:hover .el__bg:after {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .el {
+    $elW: (100% - $elMrg * ($numOfEls - 1)) / $numOfEls;
+    $elMrgRel: percentage($elMrg / $elW);
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $elW;
+    height: 100%;
+    background: #252525;
+    transition: transform $moveAT $expandAT, width $expandAT, opacity $moveAT $expandAT, z-index 0s $moveAT + $expandAT;
+    will-change: transform, width, opacity;
+  
+    &:not(.s--active) {
+      cursor: pointer;
+    }
+    
+    &__overflow {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
+  
+    &__inner {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      transition: transform $initAT;
+  
+      @include contInactive {
+        transform: translate3d(0,100%,0);
+      }
+    }
+  
+    &__bg {
+      position: relative;
+      width: calc(100vw - #{$sidePad * 2});
+      height: 100%;
+      transition: transform $moveAT $expandAT;
+      will-change: transform;
+  
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: -5%;
+        width: 100%;
+        height: 110%;
+        background-size: cover;
+        background-position: center center;
+        transition: transform $initAT;
+        transform: translate3d(0,0,0) scale(1);
+  
+        @include contInactive {
+          transform: translate3d(0,-100%,0) scale(1.2);
+        }
+  
+        @include elActive {
+          transition: transform $bgScaleAT;
+        }
+      }
+      
+      &:after {
+        $opacityAT: 0.5s;
+        
+        content: "";
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        opacity: 0;
+        transition: opacity $opacityAT;
+        
+        @include contElActive {
+          transition: opacity $opacityAT $fullExpandAT;
+          opacity: 1 !important;
+        }
+      }
+    }
+    
+    &__preview-cont {
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s $fullInitAT - 0.2s;
+      
+      @include contInactive {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      
+      @include contElActive {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.5s;
+      }
+    }
+    
+    &__heading {
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+    
+    &__content {
+      z-index: -1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      padding: 30px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.1s;
+      
+      @include elActive {
+        z-index: 2;
+        opacity: 1;
+        pointer-events: auto;
+        transition: all $contentFadeinAT $fullExpandAT;
+      }
+    }
+    
+    &__text {
+      text-transform: uppercase;
+      font-size: 40px;
+      color: #fff;
+    }
+    
+    &__close-btn {
+      
+      z-index: -1;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 60px;
+      height: 60px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0s $closeBtnAT + $closeBtnLineDelay;
+      cursor: pointer;
+      
+      @include elActive {
+        z-index: 5;
+        opacity: 1;
+        pointer-events: auto;
+        transition: all 0s $fullExpandAT;
+      }
+      
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 8px;
+        margin-top: -4px;
+        background: #fff;
+        opacity: 0;
+        transition: opacity 0s;
+        
+        @include elActive {
+          opacity: 1;
+        }
+      }
+      
+      &:before {
+        transform: rotate(45deg) translateX(100%);
+        
+        @include elActive {
+          transition: all $closeBtnAT $fullExpandAT cubic-bezier(.72,.09,.32,1.57);
+          transform: rotate(45deg) translateX(0);
+        }
+      }
+      
+      &:after {
+        transform: rotate(-45deg) translateX(100%);
+        
+        @include elActive {
+          transition: all $closeBtnAT $fullExpandAT + $closeBtnLineDelay cubic-bezier(.72,.09,.32,1.57);
+          transform: rotate(-45deg) translateX(0);
+        }
+      }
+    }
+    
+    &__index {
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      bottom: $vertPad * -1;
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      text-align: center;
+      font-size: 100vw / $numOfEls;
+      line-height: 0.85;
+      font-weight: bold;
+      transition: transform $indexHoverAT, opacity $moveAT/2 $expandAT + $expandDelay + $moveAT;
+      transform: translate3d(0,1vw,0);
+      
+      @include elHover {
+        transform: translate3d(0,0,0);
+      }
+      
+      @include contElActive {
+        transition: transform $indexHoverAT, opacity $moveAT/2;
+        opacity: 0;
+      }
+      
+      &-back,
+      &-front {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
+     
+      &-back {
+        color: #2f3840;
+        opacity: 0;
+        transition: opacity $indexHoverAT/2 $indexHoverAT/2;
+        
+        @include elHover {
+          transition: opacity $indexHoverAT/2;
+          opacity: 1;
+        }
+      }
+      
+      &-overlay {
+        overflow: hidden;
+        position: relative;
+        transform: translate3d(0,100%,0);
+        transition: transform $indexHoverAT 0.1s;
+        color: transparent;
+        
+        &:before {
+          content: attr(data-index);
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          color: #fff;
+          transform: translate3d(0,-100%,0);
+          transition: transform $indexHoverAT 0.1s;
+        }
+        
+        @include elHover {
+          transform: translate3d(0,0,0);
+          
+          &:before {
+            transform: translate3d(0,0,0);
+          }
+        }
+      }
+    }
+  
+    @for $i from 0 to $numOfEls {
+      &:nth-child(#{$i + 1}) {
+        $x: (100% + $elMrgRel) * $i;
+        transform: translate3d($x,0,0);
+        transform-origin: $x + 50% 50%;
+        
+        @include contElActive {
+          
+          &:not(.s--active) {
+            transform: scale(0.5) translate3d($x,0,0);
+            opacity: 0;
+            transition: transform $fadeoutAT, opacity $fadeoutAT;
+          }
+        }
+  
+        .el__inner {
+          transition-delay: $initDelayStep * $i;
+        }
+  
+        .el__bg__music {
+          transform: translate3d($elW * $i * -1,0,0);
+  
+          &:before {
+            transition-delay: 0.1s * $i;
+            background-image: url('https://i.pinimg.com/originals/5b/30/cf/5b30cfffef3f5a05460f73d8557d780e.jpg');
+          }
+        }
+
+        .el__bg__arts {
+            transform: translate3d($elW * $i * -1,0,0);
+    
+            &:before {
+              transition-delay: 0.1s * $i;
+              background-image: url('http://elksoperahouse.com/wp-content/uploads/2018/10/visual-arts-1.jpg');
+            }
+        }
+
+        .el__bg__business {
+            transform: translate3d($elW * $i * -1,0,0);
+    
+            &:before {
+              transition-delay: 0.1s * $i;
+              background-image: url('http://sophiabusinessangels.com/wp-content/uploads/2017/03/slide1-business.jpg');
+            }
+        }
+
+        .el__bg__sports {
+            transform: translate3d($elW * $i * -1,0,0);
+    
+            &:before {
+              transition-delay: 0.1s * $i;
+              background-image: url('https://www.desktopbackground.org/p/2013/11/26/676107_sports-basketball-wallpapers-basketball-backgrounds-hd_1920x1200_h.jpg');
+            }
+        }
+
+        .el__bg__food {
+            transform: translate3d($elW * $i * -1,0,0);
+    
+            &:before {
+              transition-delay: 0.1s * $i;
+              background-image: url('https://www.azamaraclubcruises.com/sites/default/files/heros/med-food-hero.jpg');
+            }
+        }
+      }
+    }
+    
+    &:hover {
+      
+      .el__bg:after {
+        opacity: 0;
+      }
+    }
+  
+    &.s--active {
+      z-index: 1;
+      width: 100%;
+      transform: translate3d(0,0,0);
+      transition: transform $moveAT, width $expandAT $moveAT + $expandDelay, z-index 0s;
+  
+      .el__bg {
+        transform: translate3d(0,0,0);
+        transition: transform $moveAT;
+  
+        &:before {
+          transition-delay: $moveAT;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  
+  .icon-link {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 32px;
+  
+    img {
+      width: 100%;
+      vertical-align: top;
+    }
+  
+    &--twitter {
+      left: auto;
+      right: 5px;
+    }
+  }
