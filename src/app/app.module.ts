@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { DetailComponent } from './detail/detail.component';
 import { DetailsComponent } from './details/details.component';
 
 const appRoutes:Routes = [
@@ -21,7 +20,6 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    DetailComponent,
     DetailsComponent
   ],
   imports: [
